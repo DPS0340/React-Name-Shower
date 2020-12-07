@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [name, setName] = useState('default user')
+  const [nameCandidate, setNameCandidate] = useState('')
+  const [visible, setVisible] = useState(false)
+  const changeVisibility = () => {
+    setVisible(!visible)
+  }
+  const handleChange = (event) => {
+    setNameCandidate(event.target.value)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <input typeof="text" placeholder="name" onChange={handleChange}></input>
+        <button onClick={() => setName(nameCandidate)}>Set name</button>
+      </div>
+      <button onClick={changeVisibility}>Toggle greetings</button>
+      {visible && <div id="panel">{`${name}, greetings!`}</div>}
     </div>
   );
 }
